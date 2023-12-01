@@ -52,9 +52,9 @@ npm run build
 
 ## User story
 
-"I am looking to go on a road trip and need directions from my current location to my destination"
-"I am curious what route to take to get from where I am to ____"
-"I want to plan a business trip and see if my daughter's soccer practice would be on the way"
+- "I am looking to go on a road trip and need directions from my current location to my destination"
+- "I am curious what route to take to get from where I am to ____"
+- "I want to plan a business trip and see if my daughter's soccer practice would be on the way"
 
 ## Proof of concept
 
