@@ -20,6 +20,8 @@ const App = () => {
       (err) => {
         console.error('Error getting current location: ', err);
         alert('Error getting current location. Please enable location services.');
+        // Set a default location if unable to get current location
+        setStartLocation({ lat: 41.85, lng: -87.65 }); // Default coordinates
       }
     );
   }, []);
@@ -31,9 +33,7 @@ const App = () => {
   return (
     <div className="app">
       <SearchBar onSearch={handleSearch} />
-      {startLocation && destination && (
-        <MapComponent startLocation={startLocation} destination={destination} />
-      )}
+      <MapComponent startLocation={startLocation} destination={destination} />
     </div>
   );
 };

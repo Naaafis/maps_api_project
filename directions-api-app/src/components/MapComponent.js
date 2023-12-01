@@ -6,11 +6,11 @@ import '../styles/mapStyles.css';
 const MapComponent = ({ destination, startLocation }) => {
     const [directions, setDirections] = useState(null);
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: "AIzaSyDRq8DvKx9_E-NpS-C5N3dXDT_A5aBbs-4", // Replace with your API key
+        googleMapsApiKey: "AIzaSyA5VJtsmtSXz3Eo3StLUalY96FhioCqEXI", // Replace with your API key
     });
 
     useEffect(() => {
-        if (!isLoaded || !startLocation) return;
+        if (!isLoaded || !startLocation || !destination) return;
 
         const directionsService = new google.maps.DirectionsService();
         directionsService.route({
@@ -26,16 +26,26 @@ const MapComponent = ({ destination, startLocation }) => {
         });
     }, [isLoaded, startLocation, destination]);
 
+    const mapContainerStyle = {
+        width: '100%',
+        height: '400px', // You can adjust height as per your layout
+    };
+
+    // Default center of the map (can be adjusted)
+    const defaultCenter = { lat: 41.85, lng: -87.65 };
+
     if (!isLoaded) return <div>Loading...</div>;
 
     return (
-        <GoogleMap
-            // Map settings
-            id='example-map'
-            mapContainerStyle={{ width: '100%', height: '400px' }}
-        >
-            {directions && <DirectionsRenderer directions={directions} />}
-        </GoogleMap>
+        <div className="map-container">
+            <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                center={directions ? directions.routes[0].overview_polyline : defaultCenter}
+                zoom={7}
+            >
+                {directions && <DirectionsRenderer directions={directions} />}
+            </GoogleMap>
+        </div>
     );
 };
 
